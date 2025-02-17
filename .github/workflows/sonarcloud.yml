@@ -34,9 +34,9 @@ jobs:
         run: mvn clean verify sonar:sonar
         env:
             SONAR_HOST_URL: "https://sonarcloud.io"
-            SONAR_TOKEN: ${{ secrets.sqa_64c93117d243d12184a1844e3615baa7dba3ceb2 }}
-            SONAR_PROJECT_KEY: "Gustavo-Brunner_flash-cards"
-            SONAR_ORGANIZATION: "Brunner Softwares"
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+            SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
       - name: Exibir logs de erro dos testes
         if: failure()
         run: cat target/surefire-reports/*.txt || true
