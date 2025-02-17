@@ -1,0 +1,39 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - development
+  jobs:
+    sonar:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout código
+          uses: actions/checkout@v3
+
+        - name: Configurar JDK
+          uses: actions/setup-java@v3
+          with:
+            distribution: 'temurin'
+            java-version: '17'
+
+        - name: Configurar Maven Cache
+          uses: actions/cache@v3
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-maven
+
+        - name: Rodar análise do SonarCloud
+          run: mvn clean verify sonar:sonar
+          env:
+              SONAR_HOST_URL: "https://sonarcloud.io"
+              SONAR_TOKEN: ${{ secrets.sqa_64c93117d243d12184a1844e3615baa7dba3ceb2 }}
+              SONAR_PROJECT_KEY: "Gustavo-Brunner_flash-cards"
+              SONAR_ORGANIZATION: "Brunner Softwares"
