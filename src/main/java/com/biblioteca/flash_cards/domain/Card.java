@@ -20,4 +20,6 @@ public class Card {
     private String questionText;
 
     private String answerText;
+
+    private Long deckId;
 }
