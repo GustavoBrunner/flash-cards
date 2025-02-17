@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public Long Id;
 
-    private String questionText;
+    public String QuestionText;
 
-    private String answerText;
+    public String AnswerText;
 
-    private Long deckId;
+    public Long DeckId;
 }
